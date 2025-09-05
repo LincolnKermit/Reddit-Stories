@@ -1,4 +1,6 @@
-import TTS, time
+from TTS.api import TTS
+import time
+
 
 def generate_tts(text, output_path):
     start_time = time.time()
