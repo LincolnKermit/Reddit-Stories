@@ -1,0 +1,38 @@
+from TTS.api import TTS
+import time, subprocess
+
+
+##########################################
+
+# 1.3x is a good speed, do not change
+
+##########################################
+
+
+def speed_up_wav(input_path, output_path, speed=1.3):
+    # since i couldn't find a python library to do this without changing pitch, using sox command line tool
+    """
+    Speeds up a WAV file without changing pitch using SoX.
+    """
+    # Build SoX command
+    # 'tempo -s' preserves pitch while changing speed
+    cmd = [
+        "sox", input_path, output_path,
+        "tempo", "-s", str(speed)
+    ]
+    
+    # Run command
+    subprocess.run(cmd, check=True)
+
+
+# male model to test: tts_models/en/multi-dataset/tortoise-v2
+
+def generate_tts(text, output_path):
+    start_time = time.time()
+    tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC", progress_bar=True, gpu=False)
+    tts.tts_to_file(text=text, file_path=output_path, speed=1.4)
+    print(f"TTS audio saved to {output_path} in {round(time.time() - start_time, 2)} seconds")
+    return output_path
+
+
+
