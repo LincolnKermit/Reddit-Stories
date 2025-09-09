@@ -1,10 +1,11 @@
 from TTS.api import TTS
 import time, subprocess
+from pydub import AudioSegment
 
 
 ##########################################
 
-# 1.3x is a good speed, do not change
+# 1.3x is a good speed for final ( except audio effects ), do not change
 
 ##########################################
 
@@ -34,5 +35,11 @@ def generate_tts(text, output_path):
     print(f"TTS audio saved to {output_path} in {round(time.time() - start_time, 2)} seconds")
     return output_path
 
+
+def combine_audio(input_path_1, input_path_2, output_path):
+    sound1 = AudioSegment.from_file(input_path_1)
+    sound2 = AudioSegment.from_file(input_path_2)
+    combined = sound1 + sound2
+    combined.export(output_path, format="wav")
 
 
