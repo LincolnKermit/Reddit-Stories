@@ -9,6 +9,9 @@ from pydub import AudioSegment
 
 ##########################################
 
+tts_model = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC", progress_bar=True, gpu=False)
+
+
 
 def speed_up_wav(input_path, output_path, speed=1.3):
     # since i couldn't find a python library to do this without changing pitch, using sox command line tool
@@ -28,9 +31,8 @@ def speed_up_wav(input_path, output_path, speed=1.3):
 
 # male model to test: tts_models/en/multi-dataset/tortoise-v2
 
-def generate_tts(text, output_path):
+def generate_tts(text, output_path, tts=tts_model):
     start_time = time.time()
-    tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC", progress_bar=True, gpu=False)
     tts.tts_to_file(text=text, file_path=output_path, speed=1.4)
     print(f"TTS audio saved to {output_path} in {round(time.time() - start_time, 2)} seconds")
     return output_path
@@ -39,7 +41,9 @@ def generate_tts(text, output_path):
 def combine_audio(input_path_1, input_path_2, output_path):
     sound1 = AudioSegment.from_file(input_path_1)
     sound2 = AudioSegment.from_file(input_path_2)
-    combined = sound1 + sound2
+    print("--------------------------------------------------------------------------")
+    print("Combining:", input_path_1, "+", input_path_2, "->", output_path)  # 👈 debug line
+    print("--------------------------------------------------------------------------")
+    combined = sound1.append(sound2, crossfade=0)  # concaténation sans crossfade
     combined.export(output_path, format="wav")
-
 
