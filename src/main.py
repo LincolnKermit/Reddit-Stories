@@ -5,9 +5,26 @@ from video_editor import *
 import os, uuid
 
 
+# REQUIREMENTS : Python 3.9.0 to <3.12.0
+# Make sure sox is installed : brew install sox
+
 dev_mode=False
 
 # main file to orchestrate the process !
+
+
+def setup():
+    if os.system("sox --version") != 0:
+        print("SoX is not installed. Installing...")
+        if os.system("brew install sox") != 0:
+            print("Failed to install SoX. Please install it manually.")
+        else:
+            print("SoX installed successfully.")
+    print("Setup done.")
+    exit(0)
+
+setup()
+
 
 audio_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../data/audio"))
 ding_path = os.path.join(audio_dir, "ding.wav")
