@@ -9,7 +9,7 @@ def create_video(uuid_process):
     """
     # Paths
     video_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../data/videos/sample.mp4"))
-    audio_path = os.path.abspath(os.path.join(os.path.dirname(__file__), f"../temp/{uuid_process}.wav"))
+    audio_path = os.path.abspath(os.path.join(os.path.dirname(__file__), f"../temp/{uuid_process}_final.wav"))
     output_path = os.path.abspath(os.path.join(os.path.dirname(__file__), f"../output/{uuid_process}.mp4"))
 
     if not os.path.exists(video_path):

@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 def pick(theme):
     start_time = time.time()
     url = f"https://www.reddit.com/r/{theme}/"
-    headers = {"User-Agent": "Mozilla/5.0"}  # important, otherwise Reddit may block
+    headers = {"User-Agent": "Mozilla/5.0"}
 
     resp = requests.get(url, headers=headers)
     soup = BeautifulSoup(resp.text, "html.parser")

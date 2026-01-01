@@ -23,8 +23,6 @@ def setup():
     print("Setup done.")
     exit(0)
 
-setup()
-
 
 audio_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../data/audio"))
 ding_path = os.path.join(audio_dir, "ding.wav")
