@@ -5,3 +5,4 @@ temp
 output
 *.log
 *TEMP_MPY*.mp4
+src/__pycache__
