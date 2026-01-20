@@ -100,10 +100,10 @@ dev_mode = True
 
 ### Customize Subreddit
 
-To scrape from a different subreddit, edit [src/main.py](src/main.py#L39):
+To scrape from a different subreddit, edit [src/main.py](src/main.py#L78):
 
 ```python
-for item in pick("YourSubredditName"):  # Change this
+run(dev_mode=dev_mode, theme="AmItheAsshole"):  # Change this at the line 78
 ```
 
 ## 📁 Project Structure
