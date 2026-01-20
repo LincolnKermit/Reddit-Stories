@@ -61,14 +61,15 @@ data/videos/sample.mp4
 ```
 
 You can use any video (gaming footage, nature scenes, etc.). The script will randomly cut segments to match the audio length.
-An example is already available.
+A sample video is already available.
 
 ### 5. Add Audio Ding (Optional)
 
-The script uses a "ding" sound between the title and story. Place your ding sound at:
+The script uses a "ding" sound between the title and story. You can modify it by placing any sounds at :
 ```
 data/audio/ding.wav
 ```
+As with the video, a sample sound file is already included.
 
 ## 🎯 Usage
 
