@@ -15,8 +15,12 @@ This tool scrapes stories from Reddit, converts them to speech using Text-to-Spe
 
 ## 🎥 Demo
 
+from r/confessions:
 
-https://github.com/user-attachments/assets/00f7fd2d-8645-49f1-9584-1af5caf6dfee
+https://github.com/user-attachments/assets/e33b71dc-9bfd-45ed-9176-ee64bc9f5ac2
+
+
+
 
 
 ## 📋 Prerequisites
