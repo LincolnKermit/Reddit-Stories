@@ -34,8 +34,20 @@ output_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../output"
 os.makedirs(output_dir, exist_ok=True)
 
 
-def run(dev_mode=dev_mode):
-    for item in pick("AmItheAsshole"):  # pick stories
+def run(dev_mode=dev_mode, theme="AmItheAsshole"):
+    # Clean up leftover files from previous runs
+    src_dir = os.path.dirname(__file__)
+    output_srt = os.path.join(src_dir, "output.srt")
+    temp_mp3 = os.path.join(src_dir, "temp.mp3")
+    
+    if os.path.exists(output_srt):
+        os.remove(output_srt)
+        print("Cleaned up old output.srt")
+    if os.path.exists(temp_mp3):
+        os.remove(temp_mp3)
+        print("Cleaned up old temp.mp3")
+    
+    for item in pick(theme):  # pick stories
         text = scrap(item["url"])
         uuid_process = uuid.uuid4()
         raw_title = os.path.join(temp_dir, f"{uuid_process}_title_raw.wav")
@@ -67,12 +79,7 @@ def run(dev_mode=dev_mode):
         if dev_mode == False:
             os.system("rm ../temp/*")
             print("Temp files deleted")
-        # delete subtitles.srt and temp.mp3 in .
-        if os.path.exists("subtitles.srt"):
-            os.remove("subtitles.srt")
-        if os.path.exists("temp.mp3"):
-            os.remove("temp.mp3")
         print("End")
 
 print("Starting... \nDev mode:", dev_mode)
-run(dev_mode=dev_mode)
+run(dev_mode=dev_mode, theme="AmItheAsshole")

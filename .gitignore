@@ -8,4 +8,5 @@ output/
 src/__pycache__
 src/temp.mp3
 src/subtitles.srt
+src/YARS.log
 .vscode
