@@ -2,7 +2,10 @@
 __pycache__
 temp
 .DS_Store
-output
+output/
 *.log
 *TEMP_MPY*.mp4
 src/__pycache__
+src/temp.mp3
+src/subtitles.srt
+.vscode

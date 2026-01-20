@@ -11,6 +11,8 @@ try:
     import whisper
     import yt_dlp
     from moviepy.editor import *
+    from moviepy.video.tools.subtitles import SubtitlesClip
+    from moviepy.video.VideoClip import TextClip
 except ImportError:
     print("trying to install dependencies")
 
@@ -110,26 +112,38 @@ class SubtitleGenerator:
     def attach(self) -> None:
         self.generate()
         if os.path.exists(OUTPUT_SRT):
-            subtitles = SubtitlesClip(
-                OUTPUT_SRT,
-                lambda txt: TextClip(
-                    txt,
-                    font="Arial",
-                    fontsize=24,
-                    color="white",
-                    bg_color="black",
-                ),
-            )
-
-            video_with_subtitles = CompositeVideoClip(
-                [
-                    self.videomanager.video,
-                    subtitles.set_position(("center", 0.95), relative=True),
-                ]
-            )
-
-            video_with_subtitles.write_videofile(OUTPUT_VID, codec="libx264")
-            print(f"saved to {OUTPUT_VID}")
+            # Use ffmpeg to burn subtitles into the video
+            # Get absolute paths
+            srt_path = os.path.abspath(OUTPUT_SRT)
+            input_video = self.videomanager.path
+            
+            # Create output path - replace original video
+            output_dir = os.path.dirname(input_video)
+            uuid_name = os.path.basename(input_video)
+            temp_output = os.path.join(output_dir, f"temp_sub_{uuid_name}")
+            
+            # Escape the SRT path for ffmpeg subtitles filter
+            srt_path_escaped = srt_path.replace('\\', '/').replace(':', '\\:')
+            
+            cmd = [
+                'ffmpeg',
+                '-i', input_video,
+                '-vf', f"subtitles='{srt_path_escaped}'",
+                '-c:v', 'libx264',
+                '-c:a', 'copy',
+                '-y',
+                temp_output
+            ]
+            
+            result = subprocess.run(cmd, capture_output=True, text=True)
+            if result.returncode == 0:
+                # Replace original video with subtitled version
+                os.replace(temp_output, input_video)
+                print(f"Subtitles added to {input_video}")
+            else:
+                print(f"Error adding subtitles: {result.stderr}")
+                if os.path.exists(temp_output):
+                    os.remove(temp_output)
 
 def check_ffmpeg() -> bool:
     try:

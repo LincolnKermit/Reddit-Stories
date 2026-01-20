@@ -2,6 +2,7 @@ from reddit_scraper import *
 from reddit_story import *
 from audio_editor import *
 from video_editor import *
+from subtitles import VideoManager, SubtitleGenerator
 import os, uuid
 
 
@@ -55,10 +56,22 @@ def run(dev_mode=dev_mode):
         print("final_audio:", final_audio)
         combine_audio(sped_title, ding_path, with_ding)
         combine_audio(with_ding, sped_text, final_audio)
-        create_video(uuid_process)
+        video_path = create_video(uuid_process)
+        
+        # Generate and attach subtitles
+        print("Generating subtitles...")
+        videomanager = VideoManager(video_path, youtube=False)
+        subtitle_generator = SubtitleGenerator(videomanager)
+        subtitle_generator.attach()
+        print("Subtitles attached successfully")
         if dev_mode == False:
             os.system("rm ../temp/*")
             print("Temp files deleted")
+        # delete subtitles.srt and temp.mp3 in .
+        if os.path.exists("subtitles.srt"):
+            os.remove("subtitles.srt")
+        if os.path.exists("temp.mp3"):
+            os.remove("temp.mp3")
         print("End")
 
 print("Starting... \nDev mode:", dev_mode)
