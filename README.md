@@ -15,8 +15,13 @@ This tool scrapes stories from Reddit, converts them to speech using Text-to-Spe
 
 ## 🎥 Demo
 
-<!-- Add your demo video here -->
-*Demo video coming soon!*
+from r/confessions:
+
+https://github.com/user-attachments/assets/e33b71dc-9bfd-45ed-9176-ee64bc9f5ac2
+
+
+
+
 
 ## 📋 Prerequisites
 
@@ -61,14 +66,15 @@ data/videos/sample.mp4
 ```
 
 You can use any video (gaming footage, nature scenes, etc.). The script will randomly cut segments to match the audio length.
-An example is already available.
+A sample video is already available.
 
 ### 5. Add Audio Ding (Optional)
 
-The script uses a "ding" sound between the title and story. Place your ding sound at:
+The script uses a "ding" sound between the title and story. You can modify it by placing any sounds at :
 ```
 data/audio/ding.wav
 ```
+As with the video, a sample sound file is already included.
 
 ## 🎯 Usage
 
@@ -100,10 +106,10 @@ dev_mode = True
 
 ### Customize Subreddit
 
-To scrape from a different subreddit, edit [src/main.py](src/main.py#L39):
+To scrape from a different subreddit, edit [src/main.py](src/main.py#L78):
 
 ```python
-for item in pick("YourSubredditName"):  # Change this
+run(dev_mode=dev_mode, theme="AmItheAsshole"):  # Change this at the line 78
 ```
 
 ## 📁 Project Structure
