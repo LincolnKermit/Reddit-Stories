@@ -92,4 +92,3 @@ def scrap(url):
     else:
         print("Post content not found")
         return None
-        return None

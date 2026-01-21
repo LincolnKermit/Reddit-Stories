@@ -46,5 +46,4 @@ def create_video(uuid_process):
             video_clip.close()
         if 'final_clip' in locals():
             final_clip.close()
-
     return output_path

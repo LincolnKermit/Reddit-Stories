@@ -47,4 +47,4 @@ def pick(subreddit, limit=10, category="top", time_filter="week"):
 
 # test
 if __name__ == "__main__":
-    pick("AmItheAsshole", limit=5, category="top", time_filter="week")
+    pick("confession", limit=5, category="top", time_filter="week")
