@@ -203,14 +203,14 @@ This project is for educational purposes. Respect Reddit's terms of service and 
 - This tool is for educational and personal use
 
 ## 🙏 Credits
-
+- **@LincolnKermit** - Original creator
 - **YARS** - Reddit scraping library
 - **OpenAI Whisper** - Subtitle generation
 - **Coqui TTS** - Text-to-Speech engine
 
 ---
 
-Made with ❤️ for content creators
+Made with ❤️ for content creators by [@LincolnKermit](https://github.com/lincolnkermit)
 
 
 
